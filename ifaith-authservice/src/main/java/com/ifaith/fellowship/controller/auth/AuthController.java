@@ -21,9 +21,9 @@ public class AuthController {
 	@RequestMapping(value = "/user/{sysno}", method = RequestMethod.GET)
 	public UserBasicInfo getUserBasicInformation(@PathVariable("sysno") int sysNo) {
 
-		UserBasicInfo userBasicInfo = new UserBasicInfo(100, "Alan", 13);
+		UserBasicInfo userBasicInfo = new UserBasicInfo(100, "Alan", new Date());
 		if (sysNo != 0) {
-			userBasicInfo = new UserBasicInfo(101, "Other Test", 13);
+			userBasicInfo = new UserBasicInfo(101, "Other Test", new Date());
 		}
 		return userBasicInfo;
 	}

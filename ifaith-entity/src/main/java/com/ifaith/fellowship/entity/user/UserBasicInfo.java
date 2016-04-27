@@ -1,23 +1,34 @@
 package com.ifaith.fellowship.entity.user;
 
-public class UserBasicInfo {
-	private long sysNo;
-	private String name;
-	private int age;
+import java.util.Calendar;
+import java.util.Date;
+
+import com.ifaith.fellowship.entity.common.BasicEntity;
+
+public class UserBasicInfo extends BasicEntity{
+	protected long sysNo;
+	protected String name;
+	protected String password;
+	protected Date dateOfBirth;
+	protected int age;
+	protected int typeID;
+	protected boolean isEnabled;
 
 	public UserBasicInfo() {
 	}
 
-	public UserBasicInfo(long sysNo, String name, int age) {
+	public UserBasicInfo(long sysNo, String name, Date dateOfBirth) {
 		this.sysNo = sysNo;
 		this.name = name;
-		this.age = age;
+		this.dateOfBirth = dateOfBirth;
 	}
-	//get SysNo
+
+	// get SysNo
 	public long getSysNo() {
 		return sysNo;
 	}
-	//set SysNo
+
+	// set SysNo
 	public void setSysNo(long sysNo) {
 		this.sysNo = sysNo;
 	}
@@ -30,11 +41,42 @@ public class UserBasicInfo {
 		this.name = name;
 	}
 
-	public int getAge() {
-		return this.age;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getDateOfBirth() {
+		return this.dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public int getTypeID() {
+		return typeID;
+	}
+
+	public void setTypeID(int typeID) {
+		this.typeID = typeID;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+	public int getAge() {
+		Calendar now = Calendar.getInstance();
+		Calendar dob = Calendar.getInstance();
+		dob.setTime(this.dateOfBirth);
+		return now.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 	}
 }

@@ -1,5 +1,7 @@
 package com.ifaith.fellowship.api.controller;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,9 @@ public class UserController {
 			// "0") int sysNo) {
 			@PathVariable("sysno") int sysNo) {
 
-		UserBasicInfo userBasicInfo = new UserBasicInfo(100, "Alan", 13);
+		UserBasicInfo userBasicInfo = new UserBasicInfo(100, "Alan", new Date());
 		if (sysNo != 0) {
-			userBasicInfo = new UserBasicInfo(101, "Other", 13);
+			userBasicInfo = new UserBasicInfo(101, "Other", new Date());
 		}
 		return userBasicInfo;
 	}

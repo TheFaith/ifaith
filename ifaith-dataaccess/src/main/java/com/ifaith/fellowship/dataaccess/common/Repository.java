@@ -1,10 +1,17 @@
 package com.ifaith.fellowship.dataaccess.common;
 
-public interface Repository<T> {
+import java.io.IOException;
+import java.util.List;
 
-	public void Insert(T entity);
+public interface Repository<T, Q> {
 
-	public void Update(T entity);
+	public int insert(T entity) throws Exception;
 
-	public void Delete(T entity);
+	public int update(T entity) throws Exception;
+
+	public int delete(T entity) throws Exception;
+
+	public T find(int sysNo);
+
+	public List<T> query(QueryCondition<Q> query);
 }
