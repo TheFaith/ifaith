@@ -5,7 +5,7 @@
 *.jar
 *.war
 *.ear
-
+!/3PartLib/*.jar
 # Workspace Files #
 .metadata/
 .recommenders/
