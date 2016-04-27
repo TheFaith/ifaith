@@ -31,5 +31,10 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ifaith.fellowship</groupId>
+			<artifactId>ifaith-entity</artifactId>
+			<version>V0.1-DEV</version>
+		</dependency>
 	</dependencies>
 </project>
