@@ -3,7 +3,7 @@ package com.ifaith.fellowship.dataaccess.common;
 public class DataBuilder {
 	/// @function : create Repository Instance
 	///
-	public static <T extends Repository<T, ?>> T CreateRepository(Class<T> type)
+	public static <T extends Repository<?, ?>> T CreateRepository(Class<T> type)
 			throws InstantiationException, IllegalAccessException {
 		T objInstance = type.newInstance();
 		return objInstance;
