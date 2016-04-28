@@ -1,25 +1,33 @@
 package com.ifaith.fellowship.business.auth.creator;
 
-import com.ifaith.fellowship.business.auth.AuthUserContext;
-import com.ifaith.fellowship.dataaccess.common.DataBuilder;
-import com.ifaith.fellowship.dataaccess.people.UserRepo;
-import com.ifaith.fellowship.entity.auth.CurrentUser;
+import java.io.IOException;
 
-public class AdminUserInfomationCreator implements UserInfomationCreator{
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ifaith.fellowship.business.auth.AuthUserContext;
+import com.ifaith.fellowship.dataaccess.people.UserRepository;
+import com.ifaith.fellowship.entity.auth.CurrentUser;
+import com.ifaith.fellowship.entity.user.UserBasicInfo;
+
+public class AdminUserInfomationCreator implements UserInfomationCreator {
+
+	@Autowired
+	protected UserRepository userRepo;
 
 	@Override
 	public CurrentUser GetUserInfomation(AuthUserContext context) {
-		// TODO Auto-generated method stub
+		CurrentUser user = null;
 		try {
-			DataBuilder.<UserRepo>CreateRepository(UserRepo.class);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+			UserBasicInfo userBasic = userRepo.find(8);
+			
+			user = new CurrentUser();
+			user.setUserSysNo(userBasic.getSysNo());
+			user.setUserName(userBasic.getName());
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return user;
 	}
 
 }

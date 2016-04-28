@@ -1,16 +1,18 @@
 package com.ifaith.fellowship.dataaccess.people;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import com.ifaith.fellowship.dataaccess.common.DataSourceManager;
 import com.ifaith.fellowship.dataaccess.common.QueryCondition;
-import com.ifaith.fellowship.dataaccess.common.Repository;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
-public class UserRepo implements Repository<UserBasicInfo, Object> {
+@Repository
+public class UserRepoImp implements UserRepository {
 	// TODO Begin this will move to common.
 	// TODO End this will move to common.
 
@@ -43,7 +45,7 @@ public class UserRepo implements Repository<UserBasicInfo, Object> {
 	}
 
 	@Override
-	public int delete(UserBasicInfo entity) throws Exception{
+	public int delete(UserBasicInfo entity) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		String statement = "com.ifaith.fellowship.userMapper.deleteUser";
 
@@ -57,9 +59,16 @@ public class UserRepo implements Repository<UserBasicInfo, Object> {
 	}
 
 	@Override
-	public UserBasicInfo find(int sysNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserBasicInfo find(int sysNo) throws IOException {
+		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
+		String statement = "com.ifaith.fellowship.userMapper.getUser";
+		UserBasicInfo user = null;
+		try (SqlSession session = sessionFactory.openSession()) {
+			user = session.selectOne(statement, sysNo);
+			session.commit();
+		}
+
+		return user;
 	}
 
 	@Override

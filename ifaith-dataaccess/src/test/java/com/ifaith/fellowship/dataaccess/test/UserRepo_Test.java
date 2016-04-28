@@ -3,13 +3,16 @@ package com.ifaith.fellowship.dataaccess.test;
 import java.util.Calendar;
 
 import org.junit.Test;
-import com.ifaith.fellowship.dataaccess.people.UserRepo;
+
+import com.ifaith.fellowship.dataaccess.common.RepositoryFactory;
+import com.ifaith.fellowship.dataaccess.people.UserRepoImp;
+import com.ifaith.fellowship.dataaccess.people.UserRepository;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 public class UserRepo_Test {
 	@Test
 	public void userRepo_insert_test() throws Exception {
-		UserRepo userRepo = new UserRepo();
+		UserRepoImp userRepo = new UserRepoImp();
 		UserBasicInfo entity = new UserBasicInfo();
 
 		Calendar now = Calendar.getInstance();
@@ -37,4 +40,15 @@ public class UserRepo_Test {
 		
 		System.out.print(entity.getSysNo());
 	}
+	@Test
+	public void repositoryFactory_insert_test() throws Exception {
+		UserRepository repo =  RepositoryFactory.Create(UserRepository.class);
+		UserBasicInfo user = repo.find(8);
+		
+		System.out.println(user.getSysNo());
+		System.out.println(user.getName());
+	}
+	
+	
+	
 }

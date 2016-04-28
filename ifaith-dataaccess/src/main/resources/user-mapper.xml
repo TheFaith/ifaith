@@ -6,12 +6,9 @@
 	<select id="getUser" parameterType="int"
 		resultType="com.ifaith.fellowship.entity.user.UserBasicInfo">
         <![CDATA[
-        SELECT 
-			[AuthenticateConsumerID] AS SysNo,
-			[ConsumerAppID] AS Age,
-			[ConsumerName] AS Name
-		FROM [dbo].[AuthenticateConsumer] WITH(NOLOCK)
-		WHERE [AuthenticateConsumerID] = #{id}
+        SELECT * 
+        FROM [iFaithPeople].[dbo].[UserInformation] WITH(NOLOCK)
+		WHERE [SysNo] = #{id}
 		]]>
 	</select>
 

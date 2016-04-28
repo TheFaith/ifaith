@@ -26,6 +26,7 @@ public class UserController {
 		if (sysNo != 0) {
 			userBasicInfo = new UserBasicInfo(101, "Other", new Date());
 		}
+		
 		return userBasicInfo;
 	}
 }
