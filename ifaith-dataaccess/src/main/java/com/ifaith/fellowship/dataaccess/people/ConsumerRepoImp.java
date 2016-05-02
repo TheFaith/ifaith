@@ -9,63 +9,63 @@ import org.springframework.stereotype.Repository;
 
 import com.ifaith.fellowship.dataaccess.common.DataSourceManager;
 import com.ifaith.fellowship.dataaccess.common.QueryCondition;
-import com.ifaith.fellowship.entity.user.UserBasicInfo;
-
+import com.ifaith.fellowship.entity.auth.Consumer;
 @Repository
-public class UserRepoImp implements UserRepository {
-	protected final String STATEMENT_USER_INSERT = "com.ifaith.fellowship.userMapper.insertUser";
-	protected final String STATEMENT_USER_UPDATE = "com.ifaith.fellowship.userMapper.updateUser";
-	protected final String STATEMENT_USER_DELETE = "com.ifaith.fellowship.userMapper.deleteUser";
-	protected final String STATEMENT_USER_GET = "com.ifaith.fellowship.userMapper.getUser";
+public class ConsumerRepoImp implements ConsumerRepository {
+
+	protected final String STATEMENT_CONSUMER_INSERT = "com.ifaith.fellowship.consumerMapper.insertConsumer";
+	protected final String STATEMENT_CONSUMER_UPDATE = "com.ifaith.fellowship.consumerMapper.updateConsumer";
+	protected final String STATEMENT_CONSUMER_DELETE = "com.ifaith.fellowship.consumerMapper.deleteConsumer";
+	protected final String STATEMENT_CONSUMER_GET = "com.ifaith.fellowship.consumerMapper.getConsumer";
 
 	@Override
-	public int add(UserBasicInfo entity) throws Exception {
+	public int add(Consumer entity) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.insert(STATEMENT_USER_INSERT, entity);
+			session.insert(STATEMENT_CONSUMER_INSERT, entity);
 			session.commit();
 		}
 		return count;
 	}
 
 	@Override
-	public int save(UserBasicInfo entity) throws Exception {
+	public int save(Consumer entity) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.update(STATEMENT_USER_UPDATE, entity);
+			session.update(STATEMENT_CONSUMER_UPDATE, entity);
 			session.commit();
 		}
 		return count;
 	}
 
 	@Override
-	public int remove(UserBasicInfo entity) throws Exception {
+	public int remove(Consumer entity) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.delete(STATEMENT_USER_DELETE, entity);
+			session.delete(STATEMENT_CONSUMER_DELETE, entity);
 			session.commit();
 		}
 		return count;
 	}
 
 	@Override
-	public UserBasicInfo find(int sysNo) throws IOException {
+	public Consumer find(int sysNo) throws IOException {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
-		UserBasicInfo user = null;
+		Consumer consumer = null;
 		try (SqlSession session = sessionFactory.openSession()) {
-			user = session.selectOne(STATEMENT_USER_GET, sysNo);
+			consumer = session.selectOne(STATEMENT_CONSUMER_GET, sysNo);
 			session.commit();
 		}
-		return user;
+		return consumer;
 	}
 
 	@Override
-	public List<UserBasicInfo> findBy(QueryCondition<Object> query) {
+	public List<Consumer> findBy(QueryCondition<Object> query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

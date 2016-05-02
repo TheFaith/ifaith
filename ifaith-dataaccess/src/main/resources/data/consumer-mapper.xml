@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifaith.fellowship.consumerMapper">
+	<select id="getConsumer" parameterType="int"
+		resultType="com.ifaith.fellowship.entity.auth.Consumer">
+        <![CDATA[
+        SELECT * 
+        FROM [iFaithPeople].[dbo].[AuthenticateConsumer] WITH(NOLOCK)
+		WHERE [SysNo] = #{sysNo}
+		]]>
+	</select>
+
+	<insert id="insertConsumer" useGeneratedKeys="true" keyProperty="sysNo"
+		parameterType="com.ifaith.fellowship.entity.auth.Consumer">
+        <![CDATA[
+        INSERT INTO [iFaithPeople].[dbo].[AuthenticateConsumer](
+        	[ConsumerAppID],
+        	[ConsumerName],
+        	[ConsumerKey],
+        	[ConsumerSecret],
+        	[IsEnabled],
+        	[CreateTime],
+        	[CreateUserSysNo],
+        	[CreateUserName],
+        	[UpdateTime],
+        	[UpdateUserSysNo],
+        	[UpdateUserName]
+       	)VALUES(
+			 #{consumerAppID}
+			,#{consumerName}
+			,#{consumerKey}
+			,#{consumerSecret}
+			,#{isEnabled}
+			,#{createTime}
+			,#{createUserSysNo}
+			,#{createUserName}
+			,#{updateTime}
+			,#{updateUserSysNo}
+			,#{updateUserName}
+		)
+		]]>
+	</insert>
+
+	<update id="updateConsumer" parameterType="com.ifaith.fellowship.entity.auth.Consumer">
+        <![CDATA[
+		UPDATE [iFaithPeople].[dbo].[AuthenticateConsumer]
+		  SET [ConsumerAppID] = #{consumerAppID}
+		     ,[ConsumerName] = #{consumerName}
+		     ,[ConsumerKey] = #{consumerKey}
+		     ,[ConsumerSecret] = #{consumerSecret}
+		     ,[IsEnabled] = #{isEnabled}
+		     ,[CreateTime] = #{createTime}
+		     ,[CreateUserSysNo] = #{createUserSysNo}
+		     ,[CreateUserName] = #{createUserName}
+		     ,[UpdateTime] = #{updateTime}
+		     ,[UpdateUserSysNo] = #{updateUserSysNo}
+		     ,[UpdateUserName] = #{updateUserName}
+		WHERE [SysNo] = #{sysNo}
+		]]>
+	</update>
+
+	<delete id="deleteConsumer" parameterType="com.ifaith.fellowship.entity.auth.Consumer">
+        <![CDATA[
+		DELETE FROM [iFaithPeople].[dbo].[AuthenticateConsumer]
+		WHERE [SysNo] = #{sysNo}
+		]]>
+	</delete>
+</mapper>

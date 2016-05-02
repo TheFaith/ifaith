@@ -3,13 +3,21 @@ package com.ifaith.fellowship.entity.common;
 import java.util.Date;
 
 public class BasicEntity {
-
+	protected int sysNo;
 	protected Date createTime;
 	protected int createUserSysNo;
 	protected String createUserName;
 	protected Date updateTime;
 	protected int updateUserSysNo;
 	protected String updateUserName;
+
+	public int getSysNo() {
+		return sysNo;
+	}
+
+	public void setSysNo(int sysNo) {
+		this.sysNo = sysNo;
+	}
 
 	public Date getCreateTime() {
 		return createTime;

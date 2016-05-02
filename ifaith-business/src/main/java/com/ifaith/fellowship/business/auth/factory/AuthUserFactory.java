@@ -19,7 +19,7 @@ public abstract class AuthUserFactory {
 	public AuthUserFactory(ConsumerApp consumer) {
 		this._consumer = consumer;
 
-		this._userInfoCreator = buildUserInfomationCreator();
+		this._userInfoCreator = buildUserInformationCreator();
 		this._authorizationCreator = buildUserAuthorizationCreator();
 		this._authenticationCreator = buildUserAuthenticationCreator();
 	}
@@ -34,22 +34,49 @@ public abstract class AuthUserFactory {
 	/* # Static create factory. */
 
 	/* # Abstract method for different application. */
-	/// <summary>
-	/// create user information creator.
-	/// </summary>
-	/// <returns>creator</returns>
-	protected abstract UserInfomationCreator buildUserInfomationCreator();
+	/**
+	 * @Description build user information creator
+	 * @return creator for user authorization.
+	 * @author alan.luo
+	 */
+	protected abstract UserInfomationCreator buildUserInformationCreator();
 
-	/// <summary>
-	/// create user authorization creator.
-	/// </summary>
-	/// <returns>creator</returns>
+	/**
+	 * @Description build user authorization creator
+	 * @return creator for user authorization.
+	 * @author alan.luo
+	 */
 	protected abstract UserAuthorizationCreator buildUserAuthorizationCreator();
 
-	/// <summary>
-	/// create user authentication creator.
-	/// </summary>
-	/// <returns>creator</returns>
+	/**
+	 * @Description build user authentication creator
+	 * @return creator for user authentication.
+	 * @author alan.luo
+	 */
 	protected abstract UserAuthenticationCreator buildUserAuthenticationCreator();
 
+	/**
+	 * @param consumer
+	 *            consumer for information
+	 * @return entity for AuthUserFactory
+	 * @author alan.luo
+	 */
+	public static AuthUserFactory CreateAuthUserFactory(ConsumerApp consumer) {
+		AuthUserFactory factory = null;
+		switch (consumer) {
+		case Daycare:
+			factory = new DaycareAuthUserFactory(consumer);
+			break;
+		case AdminUI:
+			factory = new AdminAuthUserFactory(consumer);
+			break;
+		case CustomerUI:
+			factory = new CustomerAuthUserFactory(consumer);
+			break;
+		case Unknow:
+		default:
+			break;
+		}
+		return factory;
+	}
 }

@@ -18,7 +18,7 @@ public class AdminUserInfomationCreator implements UserInfomationCreator {
 	public CurrentUser GetUserInfomation(AuthUserContext context) {
 		CurrentUser user = null;
 		try {
-			UserBasicInfo userBasic = userRepo.find(8);
+			UserBasicInfo userBasic = userRepo.find(context.getSysNo());
 			
 			user = new CurrentUser();
 			user.setUserSysNo(userBasic.getSysNo());
@@ -27,6 +27,7 @@ public class AdminUserInfomationCreator implements UserInfomationCreator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return user;
 	}
 

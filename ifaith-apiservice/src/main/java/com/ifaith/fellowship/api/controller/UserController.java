@@ -17,16 +17,13 @@ public class UserController {
 	@Authentication
 	@ResponseBody
 	@RequestMapping(value = "/user/{sysno}", method = RequestMethod.GET)
-	public UserBasicInfo getUserBasicInformation(
-			// @RequestParam(value = "sysno", required = false, defaultValue =
-			// "0") int sysNo) {
-			@PathVariable("sysno") int sysNo) {
+	public UserBasicInfo getUserBasicInformation(@PathVariable("sysno") int sysNo) {
 
 		UserBasicInfo userBasicInfo = new UserBasicInfo(100, "Alan", new Date());
 		if (sysNo != 0) {
 			userBasicInfo = new UserBasicInfo(101, "Other", new Date());
 		}
-		
+
 		return userBasicInfo;
 	}
 }

@@ -43,6 +43,11 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ifaith.fellowship</groupId>
+			<artifactId>ifaith-business</artifactId>
+			<version>V0.1-DEV</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -8,15 +8,12 @@
         <![CDATA[
         SELECT * 
         FROM [iFaithPeople].[dbo].[UserInformation] WITH(NOLOCK)
-		WHERE [SysNo] = #{id}
+		WHERE [SysNo] = #{sysNo}
 		]]>
 	</select>
 
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="sysNo"
 		parameterType="com.ifaith.fellowship.entity.user.UserBasicInfo">
-		<!-- 
-		<selectKey keyProperty="sysNo" resultType="java.lang.Integer" order="AFTER">
-		-->
         <![CDATA[
         INSERT INTO [iFaithPeople].[dbo].[UserInformation](
         	[Name],
@@ -70,6 +67,4 @@
 		WHERE [SysNo] = #{sysNo}
 		]]>
 	</delete>
-
-
 </mapper>

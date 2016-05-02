@@ -1,22 +1,23 @@
 package com.ifaith.fellowship.business.auth.factory;
 
 import com.ifaith.fellowship.business.auth.ConsumerApp;
-import com.ifaith.fellowship.business.auth.creator.CustomerAuthenticationCreator;
-import com.ifaith.fellowship.business.auth.creator.CustomerUserInfomationCreator;
+import com.ifaith.fellowship.business.auth.creator.AdminAuthenticationCreator;
+import com.ifaith.fellowship.business.auth.creator.AdminUserInfomationCreator;
 import com.ifaith.fellowship.business.auth.creator.NoUserAuthorizationCreator;
 import com.ifaith.fellowship.business.auth.creator.UserAuthenticationCreator;
 import com.ifaith.fellowship.business.auth.creator.UserAuthorizationCreator;
 import com.ifaith.fellowship.business.auth.creator.UserInfomationCreator;
 
-public class CustomerAuthUserFactory extends AuthUserFactory {
+public class DaycareAuthUserFactory extends AuthUserFactory {
 
-	public CustomerAuthUserFactory(ConsumerApp consumer) {
+	public DaycareAuthUserFactory(ConsumerApp consumer) {
 		super(consumer);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected UserInfomationCreator buildUserInformationCreator() {
-		return new CustomerUserInfomationCreator();
+		return new AdminUserInfomationCreator();
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class CustomerAuthUserFactory extends AuthUserFactory {
 
 	@Override
 	protected UserAuthenticationCreator buildUserAuthenticationCreator() {
-		return new CustomerAuthenticationCreator();
+		return new AdminAuthenticationCreator();
 	}
 
 }

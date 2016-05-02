@@ -31,6 +31,8 @@ public class AuthController {
 	@ResponseBody
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public OAuthResponse createAccessToken(ResOwnerPwdCredModel model) {
+		//AuthUserFactory
+		
 		Date currentDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return new OAuthResponseModel("access_token", "token_type", dateFormat.format(currentDate), "refresh_token");

@@ -15,7 +15,7 @@ public class AdminAuthUserFactory extends AuthUserFactory {
 	}
 
 	@Override
-	protected UserInfomationCreator buildUserInfomationCreator() {
+	protected UserInfomationCreator buildUserInformationCreator() {
 		return new AdminUserInfomationCreator();
 	}
 
@@ -28,5 +28,5 @@ public class AdminAuthUserFactory extends AuthUserFactory {
 	protected UserAuthenticationCreator buildUserAuthenticationCreator() {
 		return new AdminAuthenticationCreator();
 	}
-
+	
 }

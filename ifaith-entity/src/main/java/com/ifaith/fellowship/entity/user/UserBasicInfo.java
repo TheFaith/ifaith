@@ -6,7 +6,7 @@ import java.util.Date;
 import com.ifaith.fellowship.entity.common.BasicEntity;
 
 public class UserBasicInfo extends BasicEntity{
-	protected int sysNo;
+	
 	protected String name;
 	protected String password;
 	protected Date dateOfBirth;
@@ -21,16 +21,6 @@ public class UserBasicInfo extends BasicEntity{
 		this.sysNo = sysNo;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
-	}
-
-	// get SysNo
-	public int getSysNo() {
-		return sysNo;
-	}
-
-	// set SysNo
-	public void setSysNo(int sysNo) {
-		this.sysNo = sysNo;
 	}
 
 	public String getName() {
