@@ -1,20 +1,19 @@
 package com.ifaith.fellowship.entity.auth;
 
-import com.ifaith.fellowship.entity.common.BasicEntity;
+import com.ifaith.fellowship.entity.common.BasiceQueryCondition;
 
-public class Consumer extends BasicEntity {
+public class ConsumerQC extends BasiceQueryCondition {
+	public Integer consumerAppID;
+	public String consumerName;
+	public String consumerKey;
+	public String consumerSecret;
+	public Boolean isEnabled;
 
-	public int consumerAppID = 0;
-	public String consumerName = null;
-	public String consumerKey = null;
-	public String consumerSecret = null;
-	public boolean isEnabled = false;
-
-	public int getConsumerAppID() {
+	public Integer getConsumerAppID() {
 		return consumerAppID;
 	}
 
-	public void setConsumerAppID(int consumerAppID) {
+	public void setConsumerAppID(Integer consumerAppID) {
 		this.consumerAppID = consumerAppID;
 	}
 
@@ -42,16 +41,11 @@ public class Consumer extends BasicEntity {
 		this.consumerSecret = consumerSecret;
 	}
 
-	public boolean isEnabled() {
+	public Boolean getIsEnabled() {
 		return isEnabled;
 	}
 
-	public void setEnabled(boolean isEnabled) {
+	public void setIsEnabled(Boolean isEnabled) {
 		this.isEnabled = isEnabled;
 	}
-	public ConsumerApp getConsumerApp()
-	{
-		return Enum.valueOf(ConsumerApp.class, String.valueOf(this.consumerAppID));
-	}
-	
 }

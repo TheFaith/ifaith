@@ -1,4 +1,4 @@
-package com.ifaith.fellowship.business.auth;
+package com.ifaith.fellowship.entity.auth;
 
 public enum ConsumerApp {
 	Unknow(0), AdminUI(1001), CustomerUI(1002), Daycare(1003);
@@ -17,3 +17,4 @@ public enum ConsumerApp {
 		return this.value;
 	}
 }
+

@@ -3,20 +3,55 @@ package com.ifaith.fellowship.controller.auth;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ifaith.fellowship.business.auth.AuthBizFacade;
+import com.ifaith.fellowship.entity.auth.OAuthRequest;
 import com.ifaith.fellowship.entity.auth.OAuthResponse;
 import com.ifaith.fellowship.entity.auth.OAuthResponseModel;
 import com.ifaith.fellowship.entity.auth.ResOwnerPwdCredModel;
+import com.ifaith.fellowship.entity.common.GrantType;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 @Controller
 @RequestMapping("/token")
 public class AuthController {
+
+	@Autowired
+	protected AuthBizFacade manager;
+
+	@ResponseBody
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public OAuthResponse token(OAuthRequest model) throws Exception {
+		GrantType grantType = Enum.valueOf(GrantType.class, model.getGrantType());
+		switch (grantType) {
+		case ResOwnerPwdCredentials:
+			manager.generateAccessToken(model);
+			break;
+		case AuthorizationCode:
+		case ClientCredentials:
+		case Implicit:
+		case RefreshToken:
+		case Unknow:
+		default:
+			throw new UnsupportedOperationException();
+		}
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return new OAuthResponseModel("access_token", "token_type", dateFormat.format(currentDate), "refresh_token");
+	}
+
+	/**
+	 * ----------------------------------------
+	 * ----------------------------------------
+	 * ----------------------------------------
+	 * 
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/user/{sysno}", method = RequestMethod.GET)
 	public UserBasicInfo getUserBasicInformation(@PathVariable("sysno") int sysNo) {
@@ -31,13 +66,13 @@ public class AuthController {
 	@ResponseBody
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public OAuthResponse createAccessToken(ResOwnerPwdCredModel model) {
-		//AuthUserFactory
-		
+		// AuthUserFactory
+
 		Date currentDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return new OAuthResponseModel("access_token", "token_type", dateFormat.format(currentDate), "refresh_token");
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
 	public OAuthResponse refreshAccessToken(ResOwnerPwdCredModel model) {
@@ -45,4 +80,5 @@ public class AuthController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return new OAuthResponseModel("access_token", "token_type", dateFormat.format(currentDate), "refresh_token");
 	}
+
 }

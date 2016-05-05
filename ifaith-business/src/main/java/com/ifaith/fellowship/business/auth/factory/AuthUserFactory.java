@@ -1,9 +1,10 @@
 package com.ifaith.fellowship.business.auth.factory;
 
-import com.ifaith.fellowship.business.auth.ConsumerApp;
 import com.ifaith.fellowship.business.auth.creator.UserAuthenticationCreator;
 import com.ifaith.fellowship.business.auth.creator.UserAuthorizationCreator;
 import com.ifaith.fellowship.business.auth.creator.UserInfomationCreator;
+import com.ifaith.fellowship.entity.auth.ConsumerApp;
+import com.ifaith.fellowship.entity.user.SignInModel;
 
 public abstract class AuthUserFactory {
 
@@ -30,7 +31,9 @@ public abstract class AuthUserFactory {
 	}
 
 	/* # Action to client. */
-
+	public SignInModel AuthenticationUser(String userName, String password){
+		return _authenticationCreator.authenticationUser(userName, password, "");
+	}
 	/* # Static create factory. */
 
 	/* # Abstract method for different application. */

@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ifaith.fellowship.dataaccess.common.DataSourceManager;
-import com.ifaith.fellowship.dataaccess.common.QueryCondition;
+import com.ifaith.fellowship.entity.common.BasiceQueryCondition;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 @Repository
@@ -65,7 +65,7 @@ public class UserRepoImp implements UserRepository {
 	}
 
 	@Override
-	public List<UserBasicInfo> findBy(QueryCondition<Object> query) {
+	public List<UserBasicInfo> findsBy(BasiceQueryCondition query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

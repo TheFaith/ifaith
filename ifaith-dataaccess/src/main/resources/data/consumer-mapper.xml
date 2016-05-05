@@ -11,6 +11,30 @@
 		WHERE [SysNo] = #{sysNo}
 		]]>
 	</select>
+	<select id="queryConsumer" parameterType="com.ifaith.fellowship.entity.auth.ConsumerQC"
+		resultType="com.ifaith.fellowship.entity.auth.Consumer">
+		<![CDATA[		
+		SELECT *
+		FROM [iFaithPeople].[dbo].[AuthenticateConsumer] WITH(NOLOCK)
+		]]>
+		<where>
+			<if test="consumerAppID != null">
+				consumerAppID = #{consumerAppID}
+			</if>
+			<if test="consumerName != null">
+				consumerName = #{consumerName}
+			</if>
+			<if test="consumerKey != null">
+				consumerKey = #{consumerKey}
+			</if>
+			<if test="consumerSecret != null">
+				consumerSecret = #{consumerSecret}
+			</if>
+			<if test="isEnabled != null">
+				isEnabled = #{isEnabled}
+			</if>
+		</where>
+	</select>
 
 	<insert id="insertConsumer" useGeneratedKeys="true" keyProperty="sysNo"
 		parameterType="com.ifaith.fellowship.entity.auth.Consumer">
@@ -61,10 +85,11 @@
 		]]>
 	</update>
 
-	<delete id="deleteConsumer" parameterType="com.ifaith.fellowship.entity.auth.Consumer">
+	<delete id="deleteConsumer" parameterType="int">
         <![CDATA[
 		DELETE FROM [iFaithPeople].[dbo].[AuthenticateConsumer]
 		WHERE [SysNo] = #{sysNo}
 		]]>
 	</delete>
+
 </mapper>

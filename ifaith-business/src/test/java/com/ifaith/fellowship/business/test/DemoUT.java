@@ -1,7 +1,5 @@
 package com.ifaith.fellowship.business.test;
 
-import java.io.IOException;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class DemoUT extends AbstractJUnit4SpringContextTests {
 			user = new CurrentUser();
 			user.setUserSysNo(userBasic.getSysNo());
 			user.setUserName(userBasic.getName());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

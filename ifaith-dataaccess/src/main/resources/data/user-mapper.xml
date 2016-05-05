@@ -61,7 +61,7 @@
 		]]>
 	</update>
 
-	<delete id="deleteUser" parameterType="com.ifaith.fellowship.entity.user.UserBasicInfo">
+	<delete id="deleteUser" parameterType="int">
         <![CDATA[
 		DELETE FROM [iFaithPeople].[dbo].[UserInformation]
 		WHERE [SysNo] = #{sysNo}

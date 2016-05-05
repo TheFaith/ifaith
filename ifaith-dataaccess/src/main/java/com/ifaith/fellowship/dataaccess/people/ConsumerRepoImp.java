@@ -8,15 +8,17 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ifaith.fellowship.dataaccess.common.DataSourceManager;
-import com.ifaith.fellowship.dataaccess.common.QueryCondition;
 import com.ifaith.fellowship.entity.auth.Consumer;
+import com.ifaith.fellowship.entity.auth.ConsumerQC;
+
 @Repository
 public class ConsumerRepoImp implements ConsumerRepository {
 
+	protected final String STATEMENT_CONSUMER_GET = "com.ifaith.fellowship.consumerMapper.getConsumer";
+	protected final String STATEMENT_CONSUMER_QUERY = "com.ifaith.fellowship.consumerMapper.queryConsumer";
 	protected final String STATEMENT_CONSUMER_INSERT = "com.ifaith.fellowship.consumerMapper.insertConsumer";
 	protected final String STATEMENT_CONSUMER_UPDATE = "com.ifaith.fellowship.consumerMapper.updateConsumer";
 	protected final String STATEMENT_CONSUMER_DELETE = "com.ifaith.fellowship.consumerMapper.deleteConsumer";
-	protected final String STATEMENT_CONSUMER_GET = "com.ifaith.fellowship.consumerMapper.getConsumer";
 
 	@Override
 	public int add(Consumer entity) throws Exception {
@@ -65,9 +67,27 @@ public class ConsumerRepoImp implements ConsumerRepository {
 	}
 
 	@Override
-	public List<Consumer> findBy(QueryCondition<Object> query) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Consumer> findsBy(ConsumerQC query) throws Exception {
+		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
+		List<Consumer> consumers = null;
+		try (SqlSession session = sessionFactory.openSession()) {
+			consumers = session.selectList(STATEMENT_CONSUMER_QUERY, query);
+			session.commit();
+		}
+		return consumers;
+	}
+
+	@Override
+	public Consumer findBy(String key, String secret) throws Exception {
+		Consumer consumer = null;
+		ConsumerQC query = new ConsumerQC();
+		query.setConsumerKey(key);
+		query.setConsumerSecret(secret);
+		List<Consumer> consumers = this.findsBy(query);
+		if (consumers != null && consumers.size() > 0) {
+			consumer = consumers.get(0);
+		}
+		return consumer;
 	}
 
 }

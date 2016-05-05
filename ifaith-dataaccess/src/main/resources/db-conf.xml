@@ -19,5 +19,7 @@
 	<mappers>
 		<mapper resource="data/user-mapper.xml" />
 		<mapper resource="data/consumer-mapper.xml" />
+		<mapper resource="data/token-mapper.xml" />
+		
 	</mappers>
 </configuration>

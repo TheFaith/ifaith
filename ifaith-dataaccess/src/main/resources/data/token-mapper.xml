@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifaith.fellowship.authTokenMapper">
+	<select id="getAuthToken" parameterType="int"
+		resultType="com.ifaith.fellowship.entity.auth.AuthenticateToken">
+        <![CDATA[
+        SELECT * 
+        FROM [iFaithPeople].[dbo].[AuthenticateToken] WITH(NOLOCK)
+		WHERE [SysNo] = #{sysNo}
+		]]>
+	</select>
+	<select id="queryAuthToken" parameterType="com.ifaith.fellowship.entity.auth.AuthenticateTokenQC"
+		resultType="com.ifaith.fellowship.entity.auth.AuthenticateToken">
+		<![CDATA[		
+		SELECT *
+		FROM [iFaithPeople].[dbo].[AuthenticateToken] WITH(NOLOCK)
+		]]>
+		<where>
+			<if test="userSysNo != null">
+				UserSysNo = #{userSysNo}
+			</if>
+			<if test="typeID != null">
+				TypeID = #{typeID}
+			</if>
+			<if test="accessToken != null">
+				AccessToken = #{accessToken}
+			</if>
+			<if test="refreshToken != null">
+				refreshToken = #{refreshToken}
+			</if>
+			<if test="expirationTime != null">
+				expirationTime = #{expirationTime}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insertAuthToken" useGeneratedKeys="true" keyProperty="sysNo"
+		parameterType="com.ifaith.fellowship.entity.auth.AuthenticateToken">
+        <![CDATA[
+		INSERT INTO [iFaithPeople].[dbo].[AuthenticateToken](
+			 [AuthConsumerSysNo]
+			,[UserSysNo]
+			,[TypeID]
+			,[AccessToken]
+			,[RefreshToken]
+			,[ConfusionCode]
+			,[ExpirationTime]
+			,[ExpirationInterval]
+			,[CreateTime]
+			,[CreateUserSysNo]
+			,[CreateUserName]
+			,[UpdateTime]
+			,[UpdateUserSysNo]
+			,[UpdateUserName]
+		)VALUES(
+			 #{authConsumerSysNo}
+			,#{userSysNo}
+			,#{typeID}
+			,#{accessToken}
+			,#{refreshToken}
+			,#{confusionCode}
+			,#{expirationTime}
+			,#{expirationInterval}
+			,#{createTime}
+			,#{createUserSysNo}
+			,#{createUserName}
+			,#{updateTime}
+			,#{updateUserSysNo}
+			,#{updateUserName}
+		)
+		]]>
+	</insert>
+
+	<update id="updateAuthToken" parameterType="com.ifaith.fellowship.entity.auth.AuthenticateToken">
+        <![CDATA[
+		UPDATE [iFaithPeople].[dbo].[AuthenticateToken]
+		  SET [AuthConsumerSysNo] = #{authConsumerSysNo}
+		     ,[UserSysNo] = #{userSysNo}
+		     ,[TypeID] = #{typeID}
+		     ,[AccessToken] = #{accessToken}
+		     ,[RefreshToken] = #{refreshToken}
+		     ,[ConfusionCode] = #{confusionCode}
+		     ,[ExpirationTime] = #{expirationTime}
+		     ,[ExpirationInterval] = #{expirationInterval}
+		     ,[CreateTime] = #{createTime}
+		     ,[CreateUserSysNo] = #{createUserSysNo}
+		     ,[CreateUserName] = #{createUserName}
+		     ,[UpdateTime] = #{updateTime}
+		     ,[UpdateUserSysNo] = #{updateUserSysNo}
+		     ,[UpdateUserName] = #{updateUserName}
+		WHERE [SysNo] = #{sysNo}
+		]]>
+	</update>
+
+	<delete id="deleteAuthToken" parameterType="int">
+        <![CDATA[
+		DELETE FROM [iFaithPeople].[dbo].[AuthenticateToken]
+		WHERE [SysNo] = #{sysNo}
+		]]>
+	</delete>
+
+</mapper>

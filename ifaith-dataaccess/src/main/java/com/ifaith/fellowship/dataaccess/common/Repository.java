@@ -1,9 +1,10 @@
 package com.ifaith.fellowship.dataaccess.common;
 
-import java.io.IOException;
 import java.util.List;
 
-public interface Repository<T, Q> {
+import com.ifaith.fellowship.entity.common.BasiceQueryCondition;
+
+public interface Repository<T, Q extends BasiceQueryCondition> {
 
 	public int add(T entity) throws Exception;
 
@@ -11,7 +12,7 @@ public interface Repository<T, Q> {
 
 	public int remove(T entity) throws Exception;
 
-	public T find(int sysNo)throws IOException;
+	public T find(int sysNo)throws Exception;
 
-	public List<T> findBy(QueryCondition<Q> query);
+	public List<T> findsBy(Q query)throws Exception;
 }

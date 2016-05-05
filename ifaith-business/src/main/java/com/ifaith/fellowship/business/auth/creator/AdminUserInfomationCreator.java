@@ -1,7 +1,5 @@
 package com.ifaith.fellowship.business.auth.creator;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ifaith.fellowship.business.auth.AuthUserContext;
@@ -23,7 +21,7 @@ public class AdminUserInfomationCreator implements UserInfomationCreator {
 			user = new CurrentUser();
 			user.setUserSysNo(userBasic.getSysNo());
 			user.setUserName(userBasic.getName());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
