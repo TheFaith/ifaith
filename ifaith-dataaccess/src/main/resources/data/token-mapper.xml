@@ -22,16 +22,16 @@
 				UserSysNo = #{userSysNo}
 			</if>
 			<if test="typeID != null">
-				TypeID = #{typeID}
+				AND TypeID = #{typeID}
 			</if>
 			<if test="accessToken != null">
-				AccessToken = #{accessToken}
+				AND AccessToken = #{accessToken}
 			</if>
 			<if test="refreshToken != null">
-				refreshToken = #{refreshToken}
+				AND refreshToken = #{refreshToken}
 			</if>
 			<if test="expirationTime != null">
-				expirationTime = #{expirationTime}
+				AND expirationTime = #{expirationTime}
 			</if>
 		</where>
 	</select>

@@ -5,47 +5,48 @@ import java.util.Date;
 import com.ifaith.fellowship.entity.common.BasicEntity;
 
 public class AuthenticateToken extends BasicEntity {
-	protected int tokenId;
-	protected int consumerId;
-	protected int userId;
-	protected int type;
+
+	protected int sysNo;
+	protected int authConsumerSysNo;
+	protected int userSysNo;
+	protected int typeID;
 	protected String accessToken;
 	protected String refreshToken;
 	protected String confusionCode;
-	protected Date expirationDate;
+	protected Date expirationTime;
 	protected double expirationInterval;
+
 	// protected AuthenticateConsumer Consumer { get; set; }
-
-	public int getTokenId() {
-		return tokenId;
+	public int getSysNo() {
+		return sysNo;
 	}
 
-	public void setTokenId(int tokenId) {
-		this.tokenId = tokenId;
+	public void setSysNo(int sysNo) {
+		this.sysNo = sysNo;
 	}
 
-	public int getConsumerId() {
-		return consumerId;
+	public int getAuthConsumerSysNo() {
+		return authConsumerSysNo;
 	}
 
-	public void setConsumerId(int consumerId) {
-		this.consumerId = consumerId;
+	public void setAuthConsumerSysNo(int authConsumerSysNo) {
+		this.authConsumerSysNo = authConsumerSysNo;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getUserSysNo() {
+		return userSysNo;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserSysNo(int userSysNo) {
+		this.userSysNo = userSysNo;
 	}
 
-	public int getType() {
-		return type;
+	public int getTypeID() {
+		return typeID;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setTypeID(int typeID) {
+		this.typeID = typeID;
 	}
 
 	public String getAccessToken() {
@@ -72,12 +73,12 @@ public class AuthenticateToken extends BasicEntity {
 		this.confusionCode = confusionCode;
 	}
 
-	public Date getExpirationDate() {
-		return expirationDate;
+	public Date getExpirationTime() {
+		return expirationTime;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
+	public void setExpirationTime(Date expirationTime) {
+		this.expirationTime = expirationTime;
 	}
 
 	public double getExpirationInterval() {

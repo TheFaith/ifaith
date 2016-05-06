@@ -51,7 +51,7 @@ public class Consumer extends BasicEntity {
 	}
 	public ConsumerApp getConsumerApp()
 	{
-		return Enum.valueOf(ConsumerApp.class, String.valueOf(this.consumerAppID));
+		return ConsumerApp.Covert(this.consumerAppID);
 	}
 	
 }

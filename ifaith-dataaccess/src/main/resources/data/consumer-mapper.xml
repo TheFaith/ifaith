@@ -22,16 +22,16 @@
 				consumerAppID = #{consumerAppID}
 			</if>
 			<if test="consumerName != null">
-				consumerName = #{consumerName}
+				AND consumerName = #{consumerName}
 			</if>
 			<if test="consumerKey != null">
-				consumerKey = #{consumerKey}
+				AND consumerKey = #{consumerKey}
 			</if>
 			<if test="consumerSecret != null">
-				consumerSecret = #{consumerSecret}
+				AND consumerSecret = #{consumerSecret}
 			</if>
 			<if test="isEnabled != null">
-				isEnabled = #{isEnabled}
+				AND isEnabled = #{isEnabled}
 			</if>
 		</where>
 	</select>

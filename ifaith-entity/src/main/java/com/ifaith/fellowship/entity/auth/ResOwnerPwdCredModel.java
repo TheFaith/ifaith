@@ -2,11 +2,11 @@ package com.ifaith.fellowship.entity.auth;
 
 public class ResOwnerPwdCredModel implements OAuthRequest {
 
-	protected String userName = null;
-	protected String password = null;
-	protected String consumerKey = null;
-	protected String consumerSecret = null;
-	protected String grantType = null;
+	protected String userName;
+	protected String password;
+	protected String consumerKey;
+	protected String consumerSecret;
+	protected String grantType;
 
 	public String getUserName() {
 		return userName;

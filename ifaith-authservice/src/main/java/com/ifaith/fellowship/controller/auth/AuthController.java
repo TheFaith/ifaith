@@ -3,15 +3,17 @@ package com.ifaith.fellowship.controller.auth;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ifaith.fellowship.business.auth.AuthBizFacade;
-import com.ifaith.fellowship.entity.auth.OAuthRequest;
 import com.ifaith.fellowship.entity.auth.OAuthResponse;
 import com.ifaith.fellowship.entity.auth.OAuthResponseModel;
 import com.ifaith.fellowship.entity.auth.ResOwnerPwdCredModel;
@@ -27,11 +29,14 @@ public class AuthController {
 
 	@ResponseBody
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public OAuthResponse token(OAuthRequest model) throws Exception {
-		GrantType grantType = Enum.valueOf(GrantType.class, model.getGrantType());
+	public Object token(HttpServletRequest request, @RequestBody ResOwnerPwdCredModel model) throws Exception {
+		// GrantType grantType = Enum.valueOf(GrantType.class,
+		// model.getGrantType());
+		Object returnData = null;
+		GrantType grantType = GrantType.Convert(model.getGrantType());
 		switch (grantType) {
 		case ResOwnerPwdCredentials:
-			manager.generateAccessToken(model);
+			returnData = manager.generateAccessToken(model);
 			break;
 		case AuthorizationCode:
 		case ClientCredentials:
@@ -41,9 +46,7 @@ public class AuthController {
 		default:
 			throw new UnsupportedOperationException();
 		}
-		Date currentDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return new OAuthResponseModel("access_token", "token_type", dateFormat.format(currentDate), "refresh_token");
+		return returnData;
 	}
 
 	/**
