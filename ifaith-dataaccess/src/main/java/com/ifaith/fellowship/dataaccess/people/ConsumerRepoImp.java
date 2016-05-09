@@ -14,19 +14,14 @@ import com.ifaith.fellowship.entity.auth.ConsumerQC;
 @Repository
 public class ConsumerRepoImp implements ConsumerRepository {
 
-	protected final String STATEMENT_CONSUMER_GET = "com.ifaith.fellowship.consumerMapper.getConsumer";
-	protected final String STATEMENT_CONSUMER_QUERY = "com.ifaith.fellowship.consumerMapper.queryConsumer";
-	protected final String STATEMENT_CONSUMER_INSERT = "com.ifaith.fellowship.consumerMapper.insertConsumer";
-	protected final String STATEMENT_CONSUMER_UPDATE = "com.ifaith.fellowship.consumerMapper.updateConsumer";
-	protected final String STATEMENT_CONSUMER_DELETE = "com.ifaith.fellowship.consumerMapper.deleteConsumer";
-
 	@Override
 	public int add(Consumer entity) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.insert(STATEMENT_CONSUMER_INSERT, entity);
+			ConsumerMapper mapper = session.getMapper(ConsumerMapper.class);
+			mapper.insertConsumer(entity);
 			session.commit();
 		}
 		return count;
@@ -38,18 +33,20 @@ public class ConsumerRepoImp implements ConsumerRepository {
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.update(STATEMENT_CONSUMER_UPDATE, entity);
+			ConsumerMapper mapper = session.getMapper(ConsumerMapper.class);
+			mapper.updateConsumer(entity);
 			session.commit();
 		}
 		return count;
 	}
 
 	@Override
-	public int remove(Consumer entity) throws Exception {
+	public int remove(int sysNo) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.delete(STATEMENT_CONSUMER_DELETE, entity);
+			ConsumerMapper mapper = session.getMapper(ConsumerMapper.class);
+			mapper.deleteConsumer(sysNo);
 			session.commit();
 		}
 		return count;
@@ -60,8 +57,8 @@ public class ConsumerRepoImp implements ConsumerRepository {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		Consumer consumer = null;
 		try (SqlSession session = sessionFactory.openSession()) {
-			consumer = session.selectOne(STATEMENT_CONSUMER_GET, sysNo);
-			session.commit();
+			ConsumerMapper mapper = session.getMapper(ConsumerMapper.class);
+			consumer = mapper.getConsumer(sysNo);
 		}
 		return consumer;
 	}
@@ -71,8 +68,8 @@ public class ConsumerRepoImp implements ConsumerRepository {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		List<Consumer> consumers = null;
 		try (SqlSession session = sessionFactory.openSession()) {
-			consumers = session.selectList(STATEMENT_CONSUMER_QUERY, query);
-			session.commit();
+			ConsumerMapper mapper = session.getMapper(ConsumerMapper.class);
+			consumers = mapper.queryConsumer(query);
 		}
 		return consumers;
 	}

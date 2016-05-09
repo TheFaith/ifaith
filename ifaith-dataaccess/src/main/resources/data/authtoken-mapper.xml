@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ifaith.fellowship.authTokenMapper">
+<mapper namespace="com.ifaith.fellowship.dataaccess.people.AuthTokenMapper">
 	<select id="getAuthToken" parameterType="int"
 		resultType="com.ifaith.fellowship.entity.auth.AuthenticateToken">
         <![CDATA[

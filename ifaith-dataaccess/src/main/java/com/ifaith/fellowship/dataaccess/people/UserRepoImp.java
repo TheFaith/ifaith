@@ -13,10 +13,6 @@ import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 @Repository
 public class UserRepoImp implements UserRepository {
-	protected final String STATEMENT_USER_INSERT = "com.ifaith.fellowship.userMapper.insertUser";
-	protected final String STATEMENT_USER_UPDATE = "com.ifaith.fellowship.userMapper.updateUser";
-	protected final String STATEMENT_USER_DELETE = "com.ifaith.fellowship.userMapper.deleteUser";
-	protected final String STATEMENT_USER_GET = "com.ifaith.fellowship.userMapper.getUser";
 
 	@Override
 	public int add(UserBasicInfo entity) throws Exception {
@@ -24,7 +20,8 @@ public class UserRepoImp implements UserRepository {
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.insert(STATEMENT_USER_INSERT, entity);
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			count = mapper.insertUser(entity);
 			session.commit();
 		}
 		return count;
@@ -36,18 +33,20 @@ public class UserRepoImp implements UserRepository {
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.update(STATEMENT_USER_UPDATE, entity);
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			count = mapper.updateUser(entity);
 			session.commit();
 		}
 		return count;
 	}
 
 	@Override
-	public int remove(UserBasicInfo entity) throws Exception {
+	public int remove(int sysNo) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.delete(STATEMENT_USER_DELETE, entity);
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			count = mapper.deleteUser(sysNo);
 			session.commit();
 		}
 		return count;
@@ -58,8 +57,8 @@ public class UserRepoImp implements UserRepository {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		UserBasicInfo user = null;
 		try (SqlSession session = sessionFactory.openSession()) {
-			user = session.selectOne(STATEMENT_USER_GET, sysNo);
-			session.commit();
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			user = mapper.getUser(sysNo);
 		}
 		return user;
 	}

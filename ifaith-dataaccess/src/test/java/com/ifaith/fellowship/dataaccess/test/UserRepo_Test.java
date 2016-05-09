@@ -32,11 +32,11 @@ public class UserRepo_Test {
 		entity.setCreateUserName("SystemUser");
 		entity.setUpdateUserName("SystemUser");
 
-		userRepo.add(entity);
+		int no = userRepo.add(entity);
 		entity.setName("Eric");
 		userRepo.save(entity);
 		
-		userRepo.remove(entity);
+		userRepo.remove(no);
 		
 		System.out.print(entity.getSysNo());
 	}

@@ -10,7 +10,7 @@ public interface Repository<T, Q extends BasiceQueryCondition> {
 
 	public int save(T entity) throws Exception;
 
-	public int remove(T entity) throws Exception;
+	public int remove(int sysNo) throws Exception;
 
 	public T find(int sysNo)throws Exception;
 

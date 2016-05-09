@@ -26,11 +26,11 @@ public class ConsumerRepo_Test {
 		entity.setCreateUserName("SystemUser");
 		entity.setUpdateUserName("SystemUser");
 
-		consumerRepo.add(entity);
+		int no = consumerRepo.add(entity);
 		entity.setConsumerName("Daycare");
 		consumerRepo.save(entity);
 
-		consumerRepo.remove(entity);
+		consumerRepo.remove(no);
 
 		System.out.print(entity.getSysNo());
 	}

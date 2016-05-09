@@ -18,20 +18,11 @@ public enum ConsumerApp {
 	}
 
 	public static ConsumerApp Covert(int value) {
-		ConsumerApp app = null;
-		switch (value) {
-		case 1000:
-			app = ConsumerApp.Daycare;
-			break;
-		case 1001:
-			app = ConsumerApp.AdminUI;
-			break;
-		case 1002:
-			app = ConsumerApp.CustomerUI;
-			break;
-		default:
-			app = ConsumerApp.Unknow;
-			break;
+		ConsumerApp app = ConsumerApp.Unknow;
+		for (ConsumerApp curApp : ConsumerApp.values()) {
+			if (curApp.value == value) {
+				app = curApp;
+			}
 		}
 		return app;
 	}

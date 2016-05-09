@@ -11,21 +11,16 @@ import com.ifaith.fellowship.entity.auth.AuthenticateToken;
 import com.ifaith.fellowship.entity.auth.AuthenticateTokenQC;
 
 @Repository
-public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository{
+public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository {
 
-	protected final String STATEMENT_AUTHTOKEN_GET = "com.ifaith.fellowship.authTokenMapper.getAuthToken";
-	protected final String STATEMENT_AUTHTOKEN_QUERY = "com.ifaith.fellowship.authTokenMapper.queryAuthToken";
-	protected final String STATEMENT_AUTHTOKEN_INSERT = "com.ifaith.fellowship.authTokenMapper.insertAuthToken";
-	protected final String STATEMENT_AUTHTOKEN_UPDATE = "com.ifaith.fellowship.authTokenMapper.updateAuthToken";
-	protected final String STATEMENT_AUTHTOKEN_DELETE = "com.ifaith.fellowship.authTokenMapper.deleteAuthToken";
-	
 	@Override
 	public int add(AuthenticateToken entity) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.insert(STATEMENT_AUTHTOKEN_INSERT, entity);
+			AuthTokenMapper mapper = session.getMapper(AuthTokenMapper.class);
+			mapper.insertAuthToken(entity);
 			session.commit();
 		}
 		return count;
@@ -37,18 +32,20 @@ public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository{
 
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.update(STATEMENT_AUTHTOKEN_UPDATE, entity);
+			AuthTokenMapper mapper = session.getMapper(AuthTokenMapper.class);
+			mapper.updateAuthToken(entity);
 			session.commit();
 		}
 		return count;
 	}
 
 	@Override
-	public int remove(AuthenticateToken entity) throws Exception {
+	public int remove(int sysNo) throws Exception {
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		int count = 0;
 		try (SqlSession session = sessionFactory.openSession()) {
-			session.delete(STATEMENT_AUTHTOKEN_DELETE, entity);
+			AuthTokenMapper mapper = session.getMapper(AuthTokenMapper.class);
+			count = mapper.deleteAuthToken(sysNo);
 			session.commit();
 		}
 		return count;
@@ -59,7 +56,8 @@ public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository{
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		AuthenticateToken token = null;
 		try (SqlSession session = sessionFactory.openSession()) {
-			token = session.selectOne(STATEMENT_AUTHTOKEN_GET, sysNo);
+			AuthTokenMapper mapper = session.getMapper(AuthTokenMapper.class);
+			token = mapper.getAuthToken(sysNo);
 			session.commit();
 		}
 		return token;
@@ -70,23 +68,22 @@ public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository{
 		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
 		List<AuthenticateToken> tokens = null;
 		try (SqlSession session = sessionFactory.openSession()) {
-			tokens = session.selectList(STATEMENT_AUTHTOKEN_QUERY, query);
-			session.commit();
+			AuthTokenMapper mapper = session.getMapper(AuthTokenMapper.class);
+			tokens = mapper.queryAuthToken(query);
 		}
 		return tokens;
 	}
 
 	@Override
 	public AuthenticateToken findBy(int consumerSysNo, int userSysNo) throws Exception {
+		AuthenticateToken token = null;
+
 		AuthenticateTokenQC query = new AuthenticateTokenQC();
 		query.setConsumerSysNo(consumerSysNo);
 		query.setUserSysNo(userSysNo);
-		
-		AuthenticateToken token = null;
-		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
-		try (SqlSession session = sessionFactory.openSession()) {
-			token = session.selectOne(STATEMENT_AUTHTOKEN_QUERY, query);
-			session.commit();
+		List<AuthenticateToken> tokens = this.findsBy(query);
+		if (tokens != null && tokens.size() > 0) {
+			token = tokens.get(0);
 		}
 		return token;
 	}
