@@ -69,7 +69,7 @@ public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository {
 		List<AuthenticateToken> tokens = null;
 		try (SqlSession session = sessionFactory.openSession()) {
 			AuthTokenMapper mapper = session.getMapper(AuthTokenMapper.class);
-			tokens = mapper.queryAuthToken(query);
+			tokens = mapper.queryAuthTokens(query);
 		}
 		return tokens;
 	}
@@ -81,6 +81,19 @@ public class AuthenticateTokenRepoImp implements AuthenticateTokenRepository {
 		AuthenticateTokenQC query = new AuthenticateTokenQC();
 		query.setConsumerSysNo(consumerSysNo);
 		query.setUserSysNo(userSysNo);
+		List<AuthenticateToken> tokens = this.findsBy(query);
+		if (tokens != null && tokens.size() > 0) {
+			token = tokens.get(0);
+		}
+		return token;
+	}
+
+	@Override
+	public AuthenticateToken findBy(String accessToken) throws Exception {
+		AuthenticateToken token = null;
+
+		AuthenticateTokenQC query = new AuthenticateTokenQC();
+		query.setAccessToken(accessToken);
 		List<AuthenticateToken> tokens = this.findsBy(query);
 		if (tokens != null && tokens.size() > 0) {
 			token = tokens.get(0);

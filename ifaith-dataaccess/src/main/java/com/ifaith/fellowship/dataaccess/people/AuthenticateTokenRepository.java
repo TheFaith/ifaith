@@ -6,4 +6,6 @@ import com.ifaith.fellowship.entity.auth.AuthenticateTokenQC;
 
 public interface AuthenticateTokenRepository extends Repository<AuthenticateToken, AuthenticateTokenQC> {
 	public AuthenticateToken findBy(int consumerSysNo, int userSysNo) throws Exception;
+
+	public AuthenticateToken findBy(String accessToken) throws Exception;
 }

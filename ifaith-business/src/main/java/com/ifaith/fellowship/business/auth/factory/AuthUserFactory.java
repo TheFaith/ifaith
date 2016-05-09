@@ -31,7 +31,7 @@ public abstract class AuthUserFactory {
 	}
 
 	/* # Action to client. */
-	public SignInModel AuthenticationUser(String userName, String password){
+	public SignInModel AuthenticationUser(String userName, String password) throws Exception{
 		return _authenticationCreator.authenticationUser(userName, password, "");
 	}
 	/* # Static create factory. */

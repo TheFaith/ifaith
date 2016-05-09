@@ -7,7 +7,8 @@ public class RepositoryFactory {
 	// TODO We can management the repository create here.
 	public static <T extends Repository<?, ?>> T Create(Class<T> type) {
 		T objInstance = null;
-		try(ClassPathXmlApplicationContext  context = new ClassPathXmlApplicationContext("spring-ifaith-dataaccess.xml"))
+		//try(ClassPathXmlApplicationContext  context = new ClassPathXmlApplicationContext("spring-ifaith-dataaccess.xml"))
+		try(ClassPathXmlApplicationContext  context = new ClassPathXmlApplicationContext("spring-ifaith-business.xml"))
 		{
 			objInstance = context.getBean(type);	
 		}

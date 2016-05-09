@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ifaith.fellowship.dataaccess.common.DataSourceManager;
-import com.ifaith.fellowship.entity.common.BasiceQueryCondition;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
+import com.ifaith.fellowship.entity.user.UserQC;
 
 @Repository
 public class UserRepoImp implements UserRepository {
@@ -64,9 +64,26 @@ public class UserRepoImp implements UserRepository {
 	}
 
 	@Override
-	public List<UserBasicInfo> findsBy(BasiceQueryCondition query) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UserBasicInfo> findsBy(UserQC query) throws Exception {
+		SqlSessionFactory sessionFactory = DataSourceManager.createSessionFactory();
+		List<UserBasicInfo> users = null;
+		try (SqlSession session = sessionFactory.openSession()) {
+			UserMapper mapper = session.getMapper(UserMapper.class);
+			users = mapper.queryUsers(query);
+		}
+		return users;
+	}
+
+	@Override
+	public UserBasicInfo findsBy(String name) throws Exception {
+		UserBasicInfo user = null;
+		UserQC query = new UserQC();
+		query.setName(name);
+		List<UserBasicInfo> users = this.findsBy(query);
+		if (users != null && users.size() > 0) {
+			user = users.get(0);
+		}
+		return user;
 	}
 
 }

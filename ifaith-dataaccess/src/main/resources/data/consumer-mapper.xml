@@ -11,7 +11,7 @@
 		WHERE [SysNo] = #{sysNo}
 		]]>
 	</select>
-	<select id="queryConsumer" parameterType="com.ifaith.fellowship.entity.auth.ConsumerQC"
+	<select id="queryConsumers" parameterType="com.ifaith.fellowship.entity.auth.ConsumerQC"
 		resultType="com.ifaith.fellowship.entity.auth.Consumer">
 		<![CDATA[		
 		SELECT *

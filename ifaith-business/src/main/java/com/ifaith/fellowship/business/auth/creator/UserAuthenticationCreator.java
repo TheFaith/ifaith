@@ -6,5 +6,5 @@ public interface UserAuthenticationCreator {
 	
 	public SignInModel authenticationUser(int userId, int churchId);
 
-	public SignInModel authenticationUser(String userName, String password, String churchCode);
+	public SignInModel authenticationUser(String userName, String password, String churchCode)  throws Exception;
 }

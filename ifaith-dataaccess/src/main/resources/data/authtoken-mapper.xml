@@ -11,7 +11,7 @@
 		WHERE [SysNo] = #{sysNo}
 		]]>
 	</select>
-	<select id="queryAuthToken" parameterType="com.ifaith.fellowship.entity.auth.AuthenticateTokenQC"
+	<select id="queryAuthTokens" parameterType="com.ifaith.fellowship.entity.auth.AuthenticateTokenQC"
 		resultType="com.ifaith.fellowship.entity.auth.AuthenticateToken">
 		<![CDATA[		
 		SELECT *

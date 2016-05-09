@@ -11,7 +11,30 @@
 		WHERE [SysNo] = #{sysNo}
 		]]>
 	</select>
-
+	<select id="queryUsers" parameterType="com.ifaith.fellowship.entity.user.UserQC"
+		resultType="com.ifaith.fellowship.entity.user.UserBasicInfo">
+		<![CDATA[		
+		SELECT *
+		FROM [iFaithPeople].[dbo].[UserInformation] WITH(NOLOCK)
+		]]>
+		<where>
+			<if test="name != null">
+				Name = #{name}
+			</if>
+			<if test="password != null">
+				AND Password = #{password}
+			</if>
+			<if test="dateOfBirth != null">
+				AND DateOfBirth = #{dateOfBirth}
+			</if>
+			<if test="typeID != null">
+				AND TypeID = #{typeID}
+			</if>
+			<if test="isEnabled != null">
+				AND IsEnabled = #{isEnabled}
+			</if>
+		</where>
+	</select>
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="sysNo"
 		parameterType="com.ifaith.fellowship.entity.user.UserBasicInfo">
         <![CDATA[

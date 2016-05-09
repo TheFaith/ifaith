@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 import com.ifaith.fellowship.business.auth.factory.AuthUserFactory;
 import com.ifaith.fellowship.dataaccess.people.AuthenticateTokenRepository;
 import com.ifaith.fellowship.dataaccess.people.ConsumerRepository;
+import com.ifaith.fellowship.dataaccess.people.UserRepository;
 import com.ifaith.fellowship.entity.auth.AuthenticateToken;
 import com.ifaith.fellowship.entity.auth.Consumer;
 import com.ifaith.fellowship.entity.auth.OAuthRequest;
 import com.ifaith.fellowship.entity.auth.ResOwnerPwdCredModel;
 import com.ifaith.fellowship.entity.user.SignInModel;
+import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 @Component
 public class AuthBizFacadeImp implements AuthBizFacade {
@@ -72,6 +74,8 @@ public class AuthBizFacadeImp implements AuthBizFacade {
 	protected ConsumerRepository repoConsumer;
 	@Autowired
 	protected AuthenticateTokenRepository repoToken;
+	@Autowired
+	protected UserRepository repoUser;
 
 	/**
 	 * @author alan.luo
@@ -81,7 +85,7 @@ public class AuthBizFacadeImp implements AuthBizFacade {
 	@Override
 	public Object generateAccessToken(OAuthRequest model) throws Exception {
 		if (!(model instanceof ResOwnerPwdCredModel)) {
-			//TODO throw new Exception("convert type error!");
+			// TODO throw new Exception("convert type error!");
 			return null;
 		}
 
@@ -93,12 +97,15 @@ public class AuthBizFacadeImp implements AuthBizFacade {
 
 		Consumer consumer = repoConsumer.findBy(key, secret);
 		if (consumer == null) {
-			//TODO throw new Exception("can not find consumer!");
+			// TODO throw new Exception("can not find consumer!");
 			return null;
 		}
 		// get user information
 		AuthUserFactory factory = AuthUserFactory.CreateAuthUserFactory(consumer.getConsumerApp());
 		SignInModel user = factory.AuthenticationUser(userName, password);
+		if (user == null) {
+			throw new Exception("Error test!");
+		}
 
 		// create token.
 		AuthenticateToken token = repoToken.findBy(consumer.getSysNo(), user.getUserSysNo());
@@ -143,7 +150,7 @@ public class AuthBizFacadeImp implements AuthBizFacade {
 			}
 		}
 
-		//builder output.
+		// builder output.
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		OutData xOut = new OutData();
 		xOut.setTokenType("bearer");
@@ -156,6 +163,17 @@ public class AuthBizFacadeImp implements AuthBizFacade {
 
 	public void refreshAccessToken() {
 
+	}
+
+	@Override
+	public UserBasicInfo verifyAccessToken(String strToken) throws Exception {
+		UserBasicInfo outUser = null;
+		AuthenticateToken token = repoToken.findBy(strToken);
+		Date now = new Date();
+		if (token != null && now.before(token.getExpirationTime())) {
+			outUser = repoUser.find(token.getUserSysNo());
+		}
+		return outUser;
 	}
 
 }

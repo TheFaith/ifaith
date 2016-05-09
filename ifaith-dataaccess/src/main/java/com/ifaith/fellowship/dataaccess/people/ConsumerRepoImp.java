@@ -69,7 +69,7 @@ public class ConsumerRepoImp implements ConsumerRepository {
 		List<Consumer> consumers = null;
 		try (SqlSession session = sessionFactory.openSession()) {
 			ConsumerMapper mapper = session.getMapper(ConsumerMapper.class);
-			consumers = mapper.queryConsumer(query);
+			consumers = mapper.queryConsumers(query);
 		}
 		return consumers;
 	}
