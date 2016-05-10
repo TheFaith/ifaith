@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @ Defines the metadata annotations for  rest-api Authentication
+ * @ Defines the meta-data annotations for  rest-api Authentication
  * @ Author : Alan.Luo
  * @ Create Date : 2016-04-26
  */

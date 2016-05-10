@@ -6,8 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import com.ifaith.fellowship.business.BizFacade;
 import com.ifaith.fellowship.business.auth.factory.AuthUserFactory;
 import com.ifaith.fellowship.dataaccess.people.AuthenticateTokenRepository;
 import com.ifaith.fellowship.dataaccess.people.ConsumerRepository;
@@ -19,7 +19,7 @@ import com.ifaith.fellowship.entity.auth.ResOwnerPwdCredModel;
 import com.ifaith.fellowship.entity.user.SignInModel;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
-@Component
+@BizFacade
 public class AuthBizFacadeImp implements AuthBizFacade {
 	class OutData {
 		public String getTokenType() {
