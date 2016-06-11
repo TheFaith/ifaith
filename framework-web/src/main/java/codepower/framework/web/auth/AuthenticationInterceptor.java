@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ifaith.fellowship.business.auth.AuthBizFacade;
+import com.ifaith.fellowship.service.auth.AuthService;
 import com.ifaith.fellowship.entity.auth.CurrentUser;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
-	protected AuthBizFacade manager;
+	protected AuthService manager;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

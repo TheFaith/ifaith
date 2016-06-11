@@ -42,7 +42,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ifaith.fellowship</groupId>
-			<artifactId>ifaith-business</artifactId>
+			<artifactId>ifaith-service</artifactId>
 			<version>V0.1-DEV</version>
 		</dependency>
 	</dependencies>

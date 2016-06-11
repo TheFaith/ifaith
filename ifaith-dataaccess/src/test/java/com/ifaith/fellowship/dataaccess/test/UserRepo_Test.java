@@ -2,7 +2,7 @@ package com.ifaith.fellowship.dataaccess.test;
 
 import java.util.Calendar;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import com.ifaith.fellowship.dataaccess.common.RepositoryFactory;
 import com.ifaith.fellowship.dataaccess.people.UserRepoImp;
@@ -10,7 +10,7 @@ import com.ifaith.fellowship.dataaccess.people.UserRepository;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 public class UserRepo_Test {
-	@Test
+	//@Test
 	public void userRepo_insert_test() throws Exception {
 		UserRepoImp userRepo = new UserRepoImp();
 		UserBasicInfo entity = new UserBasicInfo();
@@ -40,7 +40,7 @@ public class UserRepo_Test {
 		
 		System.out.print(entity.getSysNo());
 	}
-	@Test
+	//@Test
 	public void repositoryFactory_insert_test() throws Exception {
 		UserRepository repo =  RepositoryFactory.Create(UserRepository.class);
 		UserBasicInfo user = repo.find(8);

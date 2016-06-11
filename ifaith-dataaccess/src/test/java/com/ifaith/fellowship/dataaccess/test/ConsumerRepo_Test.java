@@ -1,12 +1,12 @@
 package com.ifaith.fellowship.dataaccess.test;
 
 import java.util.Calendar;
-import org.junit.Test;
+//import org.junit.Test;
 import com.ifaith.fellowship.dataaccess.people.ConsumerRepoImp;
 import com.ifaith.fellowship.entity.auth.Consumer;
 
 public class ConsumerRepo_Test {
-	@Test
+	//@Test
 	public void consumerRepo_insert_test() throws Exception {
 		ConsumerRepoImp consumerRepo = new ConsumerRepoImp();
 		Consumer entity = new Consumer();
