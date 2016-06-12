@@ -1,4 +1,4 @@
-package codepower.framework.web.auth;
+package codepower.framework.auth;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

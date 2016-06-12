@@ -1,14 +1,25 @@
 package com.ifaith.fellowship.entity.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-public class ResOwnerPwdCredModel implements OAuthRequest {
+@JsonRootName("oauth_model")
+public class OAuthRequestModel {
 
-	protected String userName;
-	protected String password;
+	// @NotEmpty(message = "consumer_key is required!")
 	protected String consumerKey;
+
+	// @NotEmpty(message = "consumer_secret is required!")
 	protected String consumerSecret;
+
+	// @NotEmpty(message = "grant_type is required!")
 	protected String grantType;
+
+	// @NotEmpty(message = "user_name is required!")
+	protected String userName;
+
+	// @NotEmpty(message = "password is required!")
+	protected String password;
 
 	@JsonProperty("user_name")
 	public String getUserName() {
@@ -30,37 +41,31 @@ public class ResOwnerPwdCredModel implements OAuthRequest {
 		this.password = password;
 	}
 
-	@Override
 	@JsonProperty("consumer_key")
 	public String getConsumerKey() {
 		return consumerKey;
 	}
 
-	@Override
 	@JsonProperty("consumer_key")
 	public void setConsumerKey(String consumerKey) {
 		this.consumerKey = consumerKey;
 	}
 
-	@Override
 	@JsonProperty("consumer_secret")
 	public String getConsumerSecret() {
 		return consumerSecret;
 	}
 
-	@Override
 	@JsonProperty("consumer_secret")
 	public void setConsumerSecret(String consumerSecret) {
 		this.consumerSecret = consumerSecret;
 	}
 
-	@Override
 	@JsonProperty("grant_type")
 	public String getGrantType() {
 		return grantType;
 	}
 
-	@Override
 	@JsonProperty("grant_type")
 	public void setGrantType(String grantType) {
 		this.grantType = grantType;

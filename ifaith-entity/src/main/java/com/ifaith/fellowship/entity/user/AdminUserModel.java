@@ -1,6 +1,8 @@
 package com.ifaith.fellowship.entity.user;
 
-public class AdminUserModel implements SignInModel {
+import com.ifaith.fellowship.entity.auth.AuthenticationUserModel;
+
+public class AdminUserModel implements AuthenticationUserModel {
 
 	public String getUserName() {
 		return userName;

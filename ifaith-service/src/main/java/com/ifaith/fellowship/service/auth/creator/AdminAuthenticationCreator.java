@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ifaith.fellowship.dataaccess.common.RepositoryFactory;
 import com.ifaith.fellowship.dataaccess.people.UserRepository;
+import com.ifaith.fellowship.entity.auth.AuthenticationUserModel;
 import com.ifaith.fellowship.entity.user.AdminUserModel;
-import com.ifaith.fellowship.entity.user.SignInModel;
 import com.ifaith.fellowship.entity.user.UserBasicInfo;
 
 public class AdminAuthenticationCreator implements UserAuthenticationCreator {
@@ -18,13 +18,13 @@ public class AdminAuthenticationCreator implements UserAuthenticationCreator {
 	}
 
 	@Override
-	public SignInModel authenticationUser(int userId, int churchId) {
+	public AuthenticationUserModel authenticationUser(int userId, int churchId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public SignInModel authenticationUser(String userName, String password, String churchCode) throws Exception {
+	public AuthenticationUserModel authenticationUser(String userName, String password, String churchCode) throws Exception {
 		AdminUserModel model = null;
 		UserBasicInfo user = repoUser.findsBy(userName);
 		if (user != null && password.equals(user.getPassword())) {

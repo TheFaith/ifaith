@@ -1,10 +1,10 @@
 package com.ifaith.fellowship.service.auth.creator;
 
-import com.ifaith.fellowship.entity.user.SignInModel;
+import com.ifaith.fellowship.entity.auth.AuthenticationUserModel;
 
 public interface UserAuthenticationCreator {
 	
-	public SignInModel authenticationUser(int userId, int churchId);
+	public AuthenticationUserModel authenticationUser(int userId, int churchId);
 
-	public SignInModel authenticationUser(String userName, String password, String churchCode)  throws Exception;
+	public AuthenticationUserModel authenticationUser(String userName, String password, String churchCode)  throws Exception;
 }

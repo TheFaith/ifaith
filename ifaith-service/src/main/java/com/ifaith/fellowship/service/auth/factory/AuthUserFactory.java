@@ -3,8 +3,8 @@ package com.ifaith.fellowship.service.auth.factory;
 import com.ifaith.fellowship.service.auth.creator.UserAuthenticationCreator;
 import com.ifaith.fellowship.service.auth.creator.UserAuthorizationCreator;
 import com.ifaith.fellowship.service.auth.creator.UserInfomationCreator;
+import com.ifaith.fellowship.entity.auth.AuthenticationUserModel;
 import com.ifaith.fellowship.entity.auth.ConsumerApp;
-import com.ifaith.fellowship.entity.user.SignInModel;
 
 public abstract class AuthUserFactory {
 
@@ -31,7 +31,7 @@ public abstract class AuthUserFactory {
 	}
 
 	/* # Action to client. */
-	public SignInModel AuthenticationUser(String userName, String password) throws Exception{
+	public AuthenticationUserModel AuthenticationUser(String userName, String password) throws Exception{
 		return _authenticationCreator.authenticationUser(userName, password, "");
 	}
 	/* # Static create factory. */

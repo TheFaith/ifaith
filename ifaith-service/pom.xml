@@ -52,5 +52,10 @@
 			<artifactId>ifaith-viewmodel</artifactId>
 			<version>V0.1-DEV</version>
 		</dependency>
+		<dependency>
+			<groupId>codepower.framework</groupId>
+			<artifactId>framework-core</artifactId>
+			<version>V0.1-DEV</version>
+		</dependency>
 	</dependencies>
 </project>

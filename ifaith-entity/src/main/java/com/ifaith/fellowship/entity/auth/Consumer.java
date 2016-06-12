@@ -3,13 +3,21 @@ package com.ifaith.fellowship.entity.auth;
 import com.ifaith.fellowship.entity.common.BasicEntity;
 
 public class Consumer extends BasicEntity {
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	protected int id;
 	public int consumerAppID = 0;
 	public String consumerName = null;
 	public String consumerKey = null;
 	public String consumerSecret = null;
 	public boolean isEnabled = false;
 
+	
 	public int getConsumerAppID() {
 		return consumerAppID;
 	}

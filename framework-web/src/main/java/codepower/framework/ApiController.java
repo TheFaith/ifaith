@@ -1,4 +1,4 @@
-package codepower.framework.web;
+package codepower.framework;
 
 import java.util.HashMap;
 import java.util.Map;
